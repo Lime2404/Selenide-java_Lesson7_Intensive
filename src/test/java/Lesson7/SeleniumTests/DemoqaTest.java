@@ -24,6 +24,7 @@ public class DemoqaTest extends BaseTest {
 
 
 // 2.Develop smoke autotests for the main page
+
     /**
      * Assert that all element can be found on the main page
      */
@@ -62,6 +63,7 @@ public class DemoqaTest extends BaseTest {
 
 // 3. Using selenium webdriver to develop a test that handles the Progress Bar
 //element (waiting for it to complete)
+
     /**
      * Assert that progress bar is complete
      */
@@ -78,10 +80,12 @@ public class DemoqaTest extends BaseTest {
         if (progressBar.getStartButton().getText().equals("Reset")) {
             System.out.println("The status of the button turned to = " + progressBar.getStartButton().getText() + ", progress bar load is 100%");
         }
+        logger.info("The status of the button turned to = " + progressBar.getStartButton().getText() + ", progress bar load is 100%");
     }
 
 // 4. Develop a test that selects values from the list //[Red, Green, Purple, Indigo] on the page https://demoqa.com/autocomplete
 //     "Type multiple color names". Important, 2 different values should //be selected at each run (use the Random function).
+
     /**
      * Select color randomly
      */
@@ -93,8 +97,7 @@ public class DemoqaTest extends BaseTest {
         String[] colors = {"Red", "Green", "Purple", "Indigo"};
 
         colorCompletionPage.randomizer(colors);
-        System.out.println("Two random color sets have been selected");
-
+        logger.info("Two random color sets have been selected");
         Selenide.sleep(10000L);
     }
 
@@ -172,6 +175,7 @@ public class DemoqaTest extends BaseTest {
             put("Address", currentAddress);
             put("State and City", state + " " + city);
         }};
+        logger.info("The form is fully filled");
 
         for (HashMap.Entry<String, String> entry : formSubmit.entrySet()) {
             String key = entry.getKey();
@@ -181,6 +185,4 @@ public class DemoqaTest extends BaseTest {
                     .parent().shouldHave(text(key + " " + value));
         }
     }
-
-
 }

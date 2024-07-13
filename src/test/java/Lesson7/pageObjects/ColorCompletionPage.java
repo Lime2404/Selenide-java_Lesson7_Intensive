@@ -4,21 +4,20 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 
 import java.util.Random;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$x;
 
 public class ColorCompletionPage {
 
     private final static String BASE_URL = "https://demoqa.com/";
-    public ColorCompletionPage(String url){
+
+    public ColorCompletionPage(String url) {
         Selenide.open(url);
     }
 
-    public void randomizer( String[] colors) {
+    public void randomizer(String[] colors) {
 
         Random random = new Random();
         int firstIndex = random.nextInt(colors.length);
@@ -34,6 +33,7 @@ public class ColorCompletionPage {
         inputElement.setValue(firstColor).pressEnter();
         inputElement.setValue(secondColor).pressEnter();
     }
+
     public static void scrollPageDown() {
         JavascriptExecutor js = (JavascriptExecutor) Selenide.webdriver().object();
         // Прокрутите на 1000 пикселей вниз

@@ -25,11 +25,9 @@ public class SelenideLogListener implements LogEventListener {
 
     @Override
     public void afterEvent(LogEvent event) {
-        // можно оставить пустым, если не требуется дополнительная обработка после события
-    }
+     }
 
     @Override
     public void beforeEvent(LogEvent logEvent) {
-//        logger.info("Before event processing for: {}", event.getSubject());
     }
 }
