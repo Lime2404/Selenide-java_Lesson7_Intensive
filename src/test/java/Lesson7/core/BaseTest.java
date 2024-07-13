@@ -15,28 +15,24 @@ import org.junit.jupiter.api.BeforeEach;
 abstract public class BaseTest {
     @BeforeAll
 
-//    protected WebDriver driver;
-
     public static void setUp() {
         SelenideConfig.setup();
         SelenideLogger.addListener("SeleniumTests.SelenideLogListener", new SelenideLogListener());
         SelenideLogger.addListener("allure", new AllureSelenide());
         WebDriverManager.chromedriver().setup();
         Configuration.browser = "chrome";
-//        Configuration.driverManagerEnabled = true; // deprecated
         Configuration.browserSize = "1920x1080";
         Configuration.headless = false;
-
     }
 
-        @BeforeEach
-         public void init(){
-            setUp();
-            System.out.println("Запускаемся");
-        }
+    @BeforeEach
+    public void init() {
+        setUp();
+        System.out.println("Запускаемся");
+    }
 
     @AfterEach
-    public void tearDown(){
+    public void tearDown() {
         Selenide.closeWebDriver();
     }
 }

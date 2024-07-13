@@ -34,24 +34,7 @@ public class MainPage {
         js.executeScript("window.scrollBy(0, 1000);");
     }
 
-//    public void clicOnElement() {
-//        elementsButton.click(); // но этого этапа мало. Для начала нам надо откоыть браузер и открыт страницу
-//    }
-
     public String returnCard() {
         return categoryCards.first().getText();
     }
-
-
-//    public ElementsCollection getCategoryCards() {
-//        return categoryCards;
-//    }
-//
-//    public SelenideElement getElementsButton() {
-//        return elementsButton;
-//    }
-//
-//    public SelenideElement getElements() {
-//        return elements;
-//    }
 }
