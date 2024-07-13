@@ -1,0 +1,205 @@
+package SeleniumTests;
+
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import pageObjects.ColorCompletionPage;
+import pageObjects.ElementsPage;
+import pageObjects.MainPage;
+import pageObjects.ProgressBarPage;
+
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Random;
+
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.*;
+
+
+public class DemoqaTest extends BaseTest {
+    private final static String BASE_URL = "https://demoqa.com/";
+//    WebDriver driver = new ChromeDriver();
+    private static final Logger logger = LogManager.getLogger(DemoqaTest.class);
+
+
+// 2. Using selenium webdriver to develop smoke autotests for the main page
+    /**
+     * Assert that all element can be found on the main page
+     */
+    @Test
+    public void assertMainPageElements() {
+        String[] expectedElements = {"Elements", "Forms", "Alerts, Frame & Windows", "Widgets", "Interactions", "Book Store Application"};
+        MainPage mainPage = new MainPage(BASE_URL);
+        String names = mainPage.returnCard();
+        System.out.println(names);
+        String[] actualList = names.split("\n+");
+        Assertions.assertArrayEquals(expectedElements, actualList);
+//        Assert.assertEquals(expectedElements, actualList);
+        logger.info("Assert returns 200");
+    }
+
+    /**
+     * Assert that the first element from the collection consist of the expected entities list
+     */
+    @Test
+    public void verifyElementPageEntities() {
+        String[] expectedList = {"Text Box", "Check Box", "Radio Button", "Web Tables", "Buttons", "Links", "Broken Links - Images", "Upload and Download", "Dynamic Properties"};
+//        System.out.println(Arrays.stream(expectedList).toList());
+        MainPage mainPage2 = new MainPage(BASE_URL);
+        mainPage2.scrollPageDown();
+        mainPage2.clicOnElements();
+
+        ElementsPage sideBarElements = new ElementsPage();
+        String[] actualList = sideBarElements.getElementsList().first().getText().split("\n+");
+        System.out.println("Expected :"+ Arrays.stream(expectedList).toList());
+        System.out.println("Actual :"+ Arrays.stream(actualList).toList());
+//        Assert.assertEquals(expectedList, actualList);
+        Assertions.assertArrayEquals(expectedList, actualList);
+        String expectedName = "Buttons";
+        String names = sideBarElements.getElements().getText();
+        boolean contains = names.contains(expectedName);
+
+//        Assert.assertTrue("Expected: element contains " + expectedName + " element name, Actual: <" + contains + ">", contains);
+//        Assert.assertTrue(contains);
+        Assertions.assertTrue(contains);
+        logger.info("Assert returns 200");
+    }
+
+
+    /**
+     * Assert that the text is present on the page. Couldn't locate the element yet
+     */
+
+// 3. Using selenium webdriver to develop a test that handles the Progress Bar
+//element (waiting for it to complete)
+    /**
+     * Assert that progress bar is complete
+     */
+
+    @Test
+    public void getStartButtonStatus() throws InterruptedException {
+        ProgressBarPage progressBar = new ProgressBarPage(BASE_URL + "progress-bar");
+        progressBar.scrollPageDown();
+        progressBar.clickStartButton();
+        while (progressBar.getStartButton().getText().equals("Stop")) {
+            System.out.println("Do not press " + progressBar.getStartButton().getText());
+        }
+
+        if(progressBar.getStartButton().getText().equals("Reset")) {
+            System.out.println("The status of the button turned to = "+ progressBar.getStartButton().getText() + ", progress bar load is 100%");
+        }
+    }
+
+// 4. Using selenium webdriver to develop a test that selects values from the list //[Red, Green, Purple, Indigo] on the page https://demoqa.com/autocomplete
+//     "Type multiple color names". Important, 2 different values should //be selected at each run (use the Random function).
+
+    /**
+     * Select color randomly
+     */
+    @Test
+    public void pickColorFromList(){
+        ColorCompletionPage colorCompletionPage = new ColorCompletionPage(BASE_URL + "auto-complete");
+//        open(BASE_URL + "auto-complete");
+        colorCompletionPage.scrollPageDown();
+        String[] colors = {"Red", "Green", "Purple", "Indigo"};
+
+        colorCompletionPage.randomizer(colors);
+        System.out.println("Two random color sets have been selected");
+
+        Selenide.sleep(10000L);
+    }
+    // Picking each color separately
+//        $(By.xpath("//input[@id='autoCompleteMultipleInput']")).setValue("Red").pressEnter();
+//        $(By.xpath("//input[@id='autoCompleteMultipleInput']")).setValue("Green").pressEnter();
+//        $(By.xpath("//input[@id='autoCompleteMultipleInput']")).setValue("Purple").pressEnter();
+//        $(By.xpath("//input[@id='autoCompleteMultipleInput']")).setValue("Indigo").pressEnter();
+
+    @org.junit.jupiter.api.Test
+    void fillFormTest() {
+        String
+                baseUrl = "https://demoqa.com/automation-practice-form",
+                firstName = "FirstName",
+                lastName = "LastName",
+                mail = "1@mail.ru",
+                genderRadioPick = "Male",
+                mobilePhone = "7123123456",
+                birthdayYear = "1993",
+                birthdayMonth = "April",
+                subject1 = "Physics",
+                subject2 = "Commerce",
+                hobbiesSport = "Sports",
+                currentAddress = "sample address",
+                fileName = "img/10_reasons.png",
+                state = "NCR",
+                city = "Delhi";
+
+        Selenide.open(baseUrl);
+        SelenideElement hideAdsButton = $(byId("close-fixedban"));
+
+        //general info
+        $(byId("firstName")).sendKeys(firstName);
+        $(byId("lastName")).sendKeys(lastName);
+        $(byId("userEmail")).sendKeys(mail);
+        $(byText(genderRadioPick)).click();
+        $(byId("userNumber")).sendKeys(mobilePhone);
+
+        //calendar
+        $(byId("dateOfBirthInput")).click();
+        $(byCssSelector(".react-datepicker__year-select")).selectOptionByValue(birthdayYear);
+        $(byCssSelector(".react-datepicker__month-select")).selectOption(birthdayMonth);
+        $(byCssSelector(".react-datepicker__day.react-datepicker__day--014")).click();
+
+        //subjects
+        $(byId("subjectsInput")).sendKeys("P");
+        $(byText(subject1)).click();
+        $(byId("subjectsInput")).sendKeys(subject2);
+        $(byId("subjectsInput")).pressEnter();
+
+        //hobbies
+        $(byText(hobbiesSport)).click();
+
+        $(byId("uploadPicture")).uploadFromClasspath(fileName);
+
+        $(byId("currentAddress")).sendKeys(currentAddress);
+
+        //hide ads
+        if (hideAdsButton.isDisplayed()) {
+            hideAdsButton.click();
+        }
+
+        $(byId("state")).scrollTo().click();
+        $(byText(state)).click();
+        $(byId("city")).click();
+        $(byId("stateCity-wrapper")).$(byText(city)).click();
+        $(byId("submit")).click();
+
+        HashMap<String, String> formSubmit = new HashMap<>() {{
+            put("Student Name", firstName + " " + lastName);
+            put("Student Email", mail);
+            put("Gender", genderRadioPick);
+            put("Mobile", mobilePhone);
+            put("Date of Birth", "14 September,1993");
+            put("Subjects", subject1 + ", " + subject2);
+            put("Hobbies", hobbiesSport);
+            put("Picture", Paths.get(fileName).getFileName().toString());
+            put("Address", currentAddress);
+            put("State and City", state + " " + city);
+        }};
+
+        for (HashMap.Entry<String, String> entry : formSubmit.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            $(byCssSelector(".table-responsive")).scrollTo().
+                    $(byText(key))
+                    .parent().shouldHave(text(key + " " + value));
+        }
+    }
+
+
+}
