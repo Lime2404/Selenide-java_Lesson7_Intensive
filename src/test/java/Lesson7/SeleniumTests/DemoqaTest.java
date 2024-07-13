@@ -1,34 +1,29 @@
-package SeleniumTests;
+package Lesson7.SeleniumTests;
 
+import Lesson7.core.BaseTest;
+import Lesson7.pageObjects.*;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import pageObjects.ColorCompletionPage;
-import pageObjects.ElementsPage;
-import pageObjects.MainPage;
-import pageObjects.ProgressBarPage;
 
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Random;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
-
+import static com.codeborne.selenide.Selenide.$;
 
 public class DemoqaTest extends BaseTest {
     private final static String BASE_URL = "https://demoqa.com/";
-//    WebDriver driver = new ChromeDriver();
+
+    //    7. Output all actions to the console using the Log4j library
     private static final Logger logger = LogManager.getLogger(DemoqaTest.class);
 
 
-// 2. Using selenium webdriver to develop smoke autotests for the main page
+// 2.Develop smoke autotests for the main page
     /**
      * Assert that all element can be found on the main page
      */
@@ -40,7 +35,6 @@ public class DemoqaTest extends BaseTest {
         System.out.println(names);
         String[] actualList = names.split("\n+");
         Assertions.assertArrayEquals(expectedElements, actualList);
-//        Assert.assertEquals(expectedElements, actualList);
         logger.info("Assert returns 200");
     }
 
@@ -50,31 +44,21 @@ public class DemoqaTest extends BaseTest {
     @Test
     public void verifyElementPageEntities() {
         String[] expectedList = {"Text Box", "Check Box", "Radio Button", "Web Tables", "Buttons", "Links", "Broken Links - Images", "Upload and Download", "Dynamic Properties"};
-//        System.out.println(Arrays.stream(expectedList).toList());
         MainPage mainPage2 = new MainPage(BASE_URL);
         mainPage2.scrollPageDown();
         mainPage2.clicOnElements();
 
         ElementsPage sideBarElements = new ElementsPage();
         String[] actualList = sideBarElements.getElementsList().first().getText().split("\n+");
-        System.out.println("Expected :"+ Arrays.stream(expectedList).toList());
-        System.out.println("Actual :"+ Arrays.stream(actualList).toList());
-//        Assert.assertEquals(expectedList, actualList);
+//        System.out.println("Expected :" + Arrays.stream(expectedList).toList());
+//        System.out.println("Actual :" + Arrays.stream(actualList).toList());
         Assertions.assertArrayEquals(expectedList, actualList);
         String expectedName = "Buttons";
         String names = sideBarElements.getElements().getText();
         boolean contains = names.contains(expectedName);
-
-//        Assert.assertTrue("Expected: element contains " + expectedName + " element name, Actual: <" + contains + ">", contains);
-//        Assert.assertTrue(contains);
         Assertions.assertTrue(contains);
         logger.info("Assert returns 200");
     }
-
-
-    /**
-     * Assert that the text is present on the page. Couldn't locate the element yet
-     */
 
 // 3. Using selenium webdriver to develop a test that handles the Progress Bar
 //element (waiting for it to complete)
@@ -91,19 +75,18 @@ public class DemoqaTest extends BaseTest {
             System.out.println("Do not press " + progressBar.getStartButton().getText());
         }
 
-        if(progressBar.getStartButton().getText().equals("Reset")) {
-            System.out.println("The status of the button turned to = "+ progressBar.getStartButton().getText() + ", progress bar load is 100%");
+        if (progressBar.getStartButton().getText().equals("Reset")) {
+            System.out.println("The status of the button turned to = " + progressBar.getStartButton().getText() + ", progress bar load is 100%");
         }
     }
 
-// 4. Using selenium webdriver to develop a test that selects values from the list //[Red, Green, Purple, Indigo] on the page https://demoqa.com/autocomplete
+// 4. Develop a test that selects values from the list //[Red, Green, Purple, Indigo] on the page https://demoqa.com/autocomplete
 //     "Type multiple color names". Important, 2 different values should //be selected at each run (use the Random function).
-
     /**
      * Select color randomly
      */
     @Test
-    public void pickColorFromList(){
+    public void pickColorFromList() {
         ColorCompletionPage colorCompletionPage = new ColorCompletionPage(BASE_URL + "auto-complete");
 //        open(BASE_URL + "auto-complete");
         colorCompletionPage.scrollPageDown();
@@ -114,14 +97,11 @@ public class DemoqaTest extends BaseTest {
 
         Selenide.sleep(10000L);
     }
-    // Picking each color separately
-//        $(By.xpath("//input[@id='autoCompleteMultipleInput']")).setValue("Red").pressEnter();
-//        $(By.xpath("//input[@id='autoCompleteMultipleInput']")).setValue("Green").pressEnter();
-//        $(By.xpath("//input[@id='autoCompleteMultipleInput']")).setValue("Purple").pressEnter();
-//        $(By.xpath("//input[@id='autoCompleteMultipleInput']")).setValue("Indigo").pressEnter();
 
     @org.junit.jupiter.api.Test
     void fillFormTest() {
+        RegistrationPage registrationPage = new RegistrationPage();
+
         String
                 baseUrl = "https://demoqa.com/automation-practice-form",
                 firstName = "FirstName",
@@ -162,6 +142,7 @@ public class DemoqaTest extends BaseTest {
         $(byId("subjectsInput")).pressEnter();
 
         //hobbies
+        registrationPage.scrollPageDown();
         $(byText(hobbiesSport)).click();
 
         $(byId("uploadPicture")).uploadFromClasspath(fileName);

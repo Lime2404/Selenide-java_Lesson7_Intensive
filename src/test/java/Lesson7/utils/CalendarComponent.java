@@ -1,4 +1,4 @@
-package pageObjects;
+package Lesson7.utils;
 
 import static com.codeborne.selenide.Selectors.byCssSelector;
 import static com.codeborne.selenide.Selenide.$;

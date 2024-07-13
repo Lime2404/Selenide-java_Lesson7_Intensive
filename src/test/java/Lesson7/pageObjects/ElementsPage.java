@@ -1,4 +1,4 @@
-package pageObjects;
+package Lesson7.pageObjects;
 
 import com.codeborne.selenide.ElementsCollection;
 import org.openqa.selenium.WebElement;

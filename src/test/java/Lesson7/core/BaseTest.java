@@ -1,5 +1,7 @@
-package SeleniumTests;
+package Lesson7.core;
 
+import Lesson7.properties.SelenideConfig;
+import Lesson7.utils.SelenideLogListener;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;

@@ -1,7 +1,10 @@
-package pageObjects;
+package Lesson7.pageObjects;
 
+import Lesson7.utils.CalendarComponent;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.JavascriptExecutor;
+
 import java.util.HashMap;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.*;
@@ -127,5 +130,10 @@ public class RegistrationPage {
                     .parent().shouldHave(text(key + " " + value));
         }
         return this;
+    }
+    public static void scrollPageDown() {
+        JavascriptExecutor js = (JavascriptExecutor) Selenide.webdriver().object();
+        // Прокрутите на 1000 пикселей вниз
+        js.executeScript("window.scrollBy(0, 1000);");
     }
 }

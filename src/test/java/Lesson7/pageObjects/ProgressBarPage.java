@@ -1,4 +1,4 @@
-package pageObjects;
+package Lesson7.pageObjects;
 
 import com.codeborne.selenide.Selenide;
 import org.openqa.selenium.JavascriptExecutor;

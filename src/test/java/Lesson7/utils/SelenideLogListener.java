@@ -1,4 +1,4 @@
-package SeleniumTests;
+package Lesson7.utils;
 
 import com.codeborne.selenide.logevents.LogEvent;
 import com.codeborne.selenide.logevents.LogEventListener;

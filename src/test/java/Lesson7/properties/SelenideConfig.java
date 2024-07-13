@@ -1,4 +1,4 @@
-package SeleniumTests;
+package Lesson7.properties;
 
 import com.codeborne.selenide.Configuration;
 import org.apache.logging.log4j.LogManager;
