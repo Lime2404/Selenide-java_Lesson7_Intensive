@@ -30,7 +30,7 @@ public class DemoqaTest extends BaseTest {
      * Assert that all element can be found on the main page
      */
     @Test
-    @Tag("SmokeTest")
+    @Tag("Test1")
     public void assertMainPageElements() {
         String[] expectedElements = {"Elements", "Forms", "Alerts, Frame & Windows", "Widgets", "Interactions", "Book Store Application"};
         MainPage mainPage = new MainPage(BASE_URL);
@@ -45,7 +45,7 @@ public class DemoqaTest extends BaseTest {
      * Assert that the first element from the collection consist of the expected entities list
      */
     @Test
-    @Tag("SmokeTest")
+    @Tag("Test2")
     public void verifyElementPageEntities() {
         String[] expectedList = {"Text Box", "Check Box", "Radio Button", "Web Tables", "Buttons", "Links", "Broken Links - Images", "Upload and Download", "Dynamic Properties"};
         MainPage mainPage2 = new MainPage(BASE_URL);
@@ -72,6 +72,7 @@ public class DemoqaTest extends BaseTest {
      */
 
     @Test
+    @Tag("Test3")
     public void getStartButtonStatus() throws InterruptedException {
         ProgressBarPage progressBar = new ProgressBarPage(BASE_URL + "progress-bar");
         progressBar.scrollPageDown();
@@ -93,6 +94,7 @@ public class DemoqaTest extends BaseTest {
      * Select color randomly
      */
     @Test
+    @Tag("Test4")
     public void pickColorFromList() {
         ColorCompletionPage colorCompletionPage = new ColorCompletionPage(BASE_URL + "auto-complete");
 //        open(BASE_URL + "auto-complete");
@@ -105,6 +107,7 @@ public class DemoqaTest extends BaseTest {
     }
 
     @org.junit.jupiter.api.Test
+    @Tag("Test5")
     void fillFormTest() {
         RegistrationPage registrationPage = new RegistrationPage();
 
