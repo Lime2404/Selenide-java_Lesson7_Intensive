@@ -28,12 +28,6 @@ public class MainPage {
         elements.click();
     }
 
-    public static void scrollPageDown() {
-        JavascriptExecutor js = (JavascriptExecutor) Selenide.webdriver().object();
-        // Прокрутите на 1000 пикселей вниз
-        js.executeScript("window.scrollBy(0, 1000);");
-    }
-
     public String returnCard() {
         return categoryCards.first().getText();
     }

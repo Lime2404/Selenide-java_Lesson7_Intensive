@@ -2,6 +2,7 @@ package Lesson7.SelenideTests;
 
 import Lesson7.core.BaseTest;
 import Lesson7.pageObjects.*;
+import Lesson7.utils.ScrollPage;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.apache.logging.log4j.LogManager;
@@ -20,7 +21,7 @@ import static com.codeborne.selenide.Selenide.$;
 public class DemoqaTest extends BaseTest {
     private final static String BASE_URL = "https://demoqa.com/";
 
-    //    7. Output all actions to the console using the Log4j library
+//    7. Output all actions to the console using the Log4j library
     private static final Logger logger = LogManager.getLogger(DemoqaTest.class);
 
 
@@ -49,7 +50,7 @@ public class DemoqaTest extends BaseTest {
     public void verifyElementPageEntities() {
         String[] expectedList = {"Text Box", "Check Box", "Radio Button", "Web Tables", "Buttons", "Links", "Broken Links - Images", "Upload and Download", "Dynamic Properties"};
         MainPage mainPage2 = new MainPage(BASE_URL);
-        mainPage2.scrollPageDown();
+        ScrollPage.scrollPageDown();
         mainPage2.clicOnElements();
 
         ElementsPage sideBarElements = new ElementsPage();
@@ -75,7 +76,7 @@ public class DemoqaTest extends BaseTest {
     @Tag("Test3")
     public void getStartButtonStatus() throws InterruptedException {
         ProgressBarPage progressBar = new ProgressBarPage(BASE_URL + "progress-bar");
-        progressBar.scrollPageDown();
+        ScrollPage.scrollPageDown();
         progressBar.clickStartButton();
         while (progressBar.getStartButton().getText().equals("Stop")) {
             System.out.println("Do not press " + progressBar.getStartButton().getText());
@@ -89,7 +90,6 @@ public class DemoqaTest extends BaseTest {
 
 // 4. Develop a test that selects values from the list //[Red, Green, Purple, Indigo] on the page https://demoqa.com/autocomplete
 //     "Type multiple color names". Important, 2 different values should //be selected at each run (use the Random function).
-
     /**
      * Select color randomly
      */
@@ -97,10 +97,9 @@ public class DemoqaTest extends BaseTest {
     @Tag("Test4")
     public void pickColorFromList() {
         ColorCompletionPage colorCompletionPage = new ColorCompletionPage(BASE_URL + "auto-complete");
-//        open(BASE_URL + "auto-complete");
-        colorCompletionPage.scrollPageDown();
         String[] colors = {"Red", "Green", "Purple", "Indigo"};
 
+        ScrollPage.scrollPageDown();
         colorCompletionPage.randomizer(colors);
         logger.info("Two random color sets have been selected");
         Selenide.sleep(10000L);
@@ -131,34 +130,29 @@ public class DemoqaTest extends BaseTest {
         Selenide.open(baseUrl);
         SelenideElement hideAdsButton = $(byId("close-fixedban"));
 
-        //general info
         $(byId("firstName")).sendKeys(firstName);
         $(byId("lastName")).sendKeys(lastName);
         $(byId("userEmail")).sendKeys(mail);
         $(byText(genderRadioPick)).click();
         $(byId("userNumber")).sendKeys(mobilePhone);
 
-        //calendar
         $(byId("dateOfBirthInput")).click();
         $(byCssSelector(".react-datepicker__year-select")).selectOptionByValue(birthdayYear);
         $(byCssSelector(".react-datepicker__month-select")).selectOption(birthdayMonth);
         $(byCssSelector(".react-datepicker__day.react-datepicker__day--014")).click();
 
-        //subjects
         $(byId("subjectsInput")).sendKeys("P");
         $(byText(subject1)).click();
         $(byId("subjectsInput")).sendKeys(subject2);
         $(byId("subjectsInput")).pressEnter();
 
-        //hobbies
-        registrationPage.scrollPageDown();
+        ScrollPage.scrollPageDown();
         $(byText(hobbiesSport)).click();
 
         $(byId("uploadPicture")).uploadFromClasspath(fileName);
 
         $(byId("currentAddress")).sendKeys(currentAddress);
-
-        //hide ads
+        ScrollPage.scrollPageDown();
         if (hideAdsButton.isDisplayed()) {
             hideAdsButton.click();
         }
@@ -174,7 +168,7 @@ public class DemoqaTest extends BaseTest {
             put("Student Email", mail);
             put("Gender", genderRadioPick);
             put("Mobile", mobilePhone);
-            put("Date of Birth", "14 September,1993");
+            put("Date of Birth", "14 April,1993");
             put("Subjects", subject1 + ", " + subject2);
             put("Hobbies", hobbiesSport);
             put("Picture", Paths.get(fileName).getFileName().toString());
