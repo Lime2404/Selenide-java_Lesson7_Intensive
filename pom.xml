@@ -14,6 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <allure.version>2.25.0</allure.version>
         <aspectj.version>1.9.21</aspectj.version>
+<!--        <includeTags>${tag}</includeTags>-->
     </properties>
     <dependencies>
         <dependency>
@@ -133,6 +134,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.3</version>
                 <configuration>
+<!--                    <groups>SmokeTest</groups>-->
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>

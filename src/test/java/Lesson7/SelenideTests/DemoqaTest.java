@@ -1,4 +1,4 @@
-package Lesson7.SeleniumTests;
+package Lesson7.SelenideTests;
 
 import Lesson7.core.BaseTest;
 import Lesson7.pageObjects.*;
@@ -107,9 +107,9 @@ public class DemoqaTest extends BaseTest {
 
         String
                 baseUrl = "https://demoqa.com/automation-practice-form",
-                firstName = "FirstName",
-                lastName = "LastName",
-                mail = "1@mail.ru",
+                firstName = "Ivan",
+                lastName = "Ivanov",
+                mail = "Ivan.Ivanov@mail.ru",
                 genderRadioPick = "Male",
                 mobilePhone = "7123123456",
                 birthdayYear = "1993",
@@ -118,7 +118,7 @@ public class DemoqaTest extends BaseTest {
                 subject2 = "Commerce",
                 hobbiesSport = "Sports",
                 currentAddress = "sample address",
-                fileName = "img/10_reasons.png",
+                fileName = "img/Solveva.png",
                 state = "NCR",
                 city = "Delhi";
 
