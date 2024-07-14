@@ -7,6 +7,7 @@ import com.codeborne.selenide.SelenideElement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Paths;
@@ -29,6 +30,7 @@ public class DemoqaTest extends BaseTest {
      * Assert that all element can be found on the main page
      */
     @Test
+    @Tag("SmokeTest")
     public void assertMainPageElements() {
         String[] expectedElements = {"Elements", "Forms", "Alerts, Frame & Windows", "Widgets", "Interactions", "Book Store Application"};
         MainPage mainPage = new MainPage(BASE_URL);
@@ -43,6 +45,7 @@ public class DemoqaTest extends BaseTest {
      * Assert that the first element from the collection consist of the expected entities list
      */
     @Test
+    @Tag("SmokeTest")
     public void verifyElementPageEntities() {
         String[] expectedList = {"Text Box", "Check Box", "Radio Button", "Web Tables", "Buttons", "Links", "Broken Links - Images", "Upload and Download", "Dynamic Properties"};
         MainPage mainPage2 = new MainPage(BASE_URL);
