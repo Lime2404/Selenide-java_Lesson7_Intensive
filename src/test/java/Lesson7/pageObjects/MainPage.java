@@ -3,7 +3,6 @@ package Lesson7.pageObjects;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.JavascriptExecutor;
 
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
@@ -15,8 +14,6 @@ import static com.codeborne.selenide.Selenide.$x;
 public class MainPage {
 
     private final ElementsCollection categoryCards = $$x("//div[@class='category-cards']");
-
-    private final SelenideElement elementsButton = $x("//a[@href='https://ultimateqa.com/consulting/']");
 
     private final SelenideElement elements = $x("//div[@class='card mt-4 top-card'][1]");
 

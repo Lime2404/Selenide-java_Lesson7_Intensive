@@ -3,15 +3,12 @@ package Lesson7.pageObjects;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 
 import java.util.Random;
 
 import static com.codeborne.selenide.Selenide.$;
 
 public class ColorCompletionPage {
-
-    private final static String BASE_URL = "https://demoqa.com/";
 
     public ColorCompletionPage(String url) {
         Selenide.open(url);

@@ -74,7 +74,7 @@ public class DemoqaTest extends BaseTest {
 
     @Test
     @Tag("Test3")
-    public void getStartButtonStatus() throws InterruptedException {
+    public void getStartButtonStatus() {
         ProgressBarPage progressBar = new ProgressBarPage(BASE_URL + "progress-bar");
         ScrollPage.scrollPageDown();
         progressBar.clickStartButton();
@@ -90,7 +90,7 @@ public class DemoqaTest extends BaseTest {
 
 // 4. Develop a test that selects values from the list //[Red, Green, Purple, Indigo] on the page https://demoqa.com/autocomplete
 //     "Type multiple color names". Important, 2 different values should //be selected at each run (use the Random function).
-    /**
+    /*
      * Select color randomly
      */
     @Test
@@ -105,10 +105,10 @@ public class DemoqaTest extends BaseTest {
         Selenide.sleep(10000L);
     }
 
+//    @Test
     @org.junit.jupiter.api.Test
     @Tag("Test5")
     void fillFormTest() {
-        RegistrationPage registrationPage = new RegistrationPage();
 
         String
                 baseUrl = "https://demoqa.com/automation-practice-form",
