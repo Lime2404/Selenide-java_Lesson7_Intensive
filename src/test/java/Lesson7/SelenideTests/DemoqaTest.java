@@ -114,10 +114,10 @@ public class DemoqaTest extends BaseTest {
                 baseUrl = "https://demoqa.com/automation-practice-form",
                 firstName = "Ivan",
                 lastName = "Ivanov",
-                mail = "Ivan.Ivanov@mail.ru",
+                email = "Ivan.Ivanov@mail.ru",
                 genderRadioPick = "Male",
                 mobilePhone = "7123123456",
-                birthdayYear = "1993",
+                birthdayYear = "1987",
                 birthdayMonth = "April",
                 subject1 = "Physics",
                 subject2 = "Commerce",
@@ -128,11 +128,11 @@ public class DemoqaTest extends BaseTest {
                 city = "Delhi";
 
         Selenide.open(baseUrl);
-        SelenideElement hideAdsButton = $(byId("close-fixedban"));
+        SelenideElement hideAdsButton = $(byId("close-add"));
 
         $(byId("firstName")).sendKeys(firstName);
         $(byId("lastName")).sendKeys(lastName);
-        $(byId("userEmail")).sendKeys(mail);
+        $(byId("userEmail")).sendKeys(email);
         $(byText(genderRadioPick)).click();
         $(byId("userNumber")).sendKeys(mobilePhone);
 
@@ -165,10 +165,10 @@ public class DemoqaTest extends BaseTest {
 
         HashMap<String, String> formSubmit = new HashMap<>() {{
             put("Student Name", firstName + " " + lastName);
-            put("Student Email", mail);
+            put("Email", email);
             put("Gender", genderRadioPick);
             put("Mobile", mobilePhone);
-            put("Date of Birth", "14 April,1993");
+            put("Date of Birth", "14 April,1987");
             put("Subjects", subject1 + ", " + subject2);
             put("Hobbies", hobbiesSport);
             put("Picture", Paths.get(fileName).getFileName().toString());
