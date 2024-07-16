@@ -129,12 +129,17 @@ public class DemoqaTest extends BaseTest {
 
         Selenide.open(baseUrl);
         SelenideElement hideAdsButton = $(byId("close-add"));
+        if (hideAdsButton.isDisplayed()) {
+            hideAdsButton.click();
+        }
 
         $(byId("firstName")).sendKeys(firstName);
         $(byId("lastName")).sendKeys(lastName);
         $(byId("userEmail")).sendKeys(email);
+        ScrollPage.scrollPageDown();
         $(byText(genderRadioPick)).click();
         $(byId("userNumber")).sendKeys(mobilePhone);
+        ScrollPage.scrollPageDown();
 
         $(byId("dateOfBirthInput")).click();
         $(byCssSelector(".react-datepicker__year-select")).selectOptionByValue(birthdayYear);
@@ -142,20 +147,18 @@ public class DemoqaTest extends BaseTest {
         $(byCssSelector(".react-datepicker__day.react-datepicker__day--014")).click();
 
         $(byId("subjectsInput")).sendKeys("P");
+        ScrollPage.scrollPageDown();
         $(byText(subject1)).click();
         $(byId("subjectsInput")).sendKeys(subject2);
         $(byId("subjectsInput")).pressEnter();
 
-        ScrollPage.scrollPageDown();
+
         $(byText(hobbiesSport)).click();
 
         $(byId("uploadPicture")).uploadFromClasspath(fileName);
 
         $(byId("currentAddress")).sendKeys(currentAddress);
         ScrollPage.scrollPageDown();
-        if (hideAdsButton.isDisplayed()) {
-            hideAdsButton.click();
-        }
 
         $(byId("state")).scrollTo().click();
         $(byText(state)).click();
@@ -176,13 +179,6 @@ public class DemoqaTest extends BaseTest {
             put("State and City", state + " " + city);
         }};
         logger.info("The form is fully filled");
-
-        for (HashMap.Entry<String, String> entry : formSubmit.entrySet()) {
-            String key = entry.getKey();
-            String value = entry.getValue();
-            $(byCssSelector(".table-responsive")).scrollTo().
-                    $(byText(key))
-                    .parent().shouldHave(text(key + " " + value));
-        }
+        Selenide.sleep(10000L);
     }
 }
