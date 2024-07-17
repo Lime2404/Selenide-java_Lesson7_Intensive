@@ -121,15 +121,4 @@ public class RegistrationPage {
         submitButton.click();
         return this;
     }
-
-//    public RegistrationPage checkForm(HashMap<String, String> formSubmit) {
-//        for (HashMap.Entry<String, String> entry : formSubmit.entrySet()) {
-//            String key = entry.getKey();
-//            String value = entry.getValue();
-//            $(byCssSelector(".table-responsive")).scrollTo().
-//                    $(byText(key))
-//                    .parent().shouldHave(text(key + " " + value));
-//        }
-//        return this;
-//    }
 }
