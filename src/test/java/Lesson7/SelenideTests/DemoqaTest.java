@@ -180,5 +180,13 @@ public class DemoqaTest extends BaseTest {
         }};
 
         logger.info("The form is fully filled");
+
+        for (HashMap.Entry<String, String> entry : formSubmit.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            $(byCssSelector(".table-responsive")).scrollTo().
+                    $(byText(key))
+                    .parent().shouldHave(text(key + " " + value));
+        }
     }
 }
