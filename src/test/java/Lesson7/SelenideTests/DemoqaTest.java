@@ -178,7 +178,16 @@ public class DemoqaTest extends BaseTest {
             put("Address", currentAddress);
             put("State and City", state + " " + city);
         }};
+
+
         logger.info("The form is fully filled");
-        Selenide.sleep(10000L);
+//        Selenide.sleep(10000L);
+        for (HashMap.Entry<String, String> entry : formSubmit.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            $(byCssSelector(".table-responsive")).scrollTo().
+                    $(byText(key))
+                    .parent().shouldHave(text(key + " " + value));
+        }
     }
 }
