@@ -28,7 +28,6 @@ abstract public class BaseTest {
     @BeforeEach
     public void init() {
         setUp();
-        System.out.println("Запускаемся");
     }
 
     @AfterEach

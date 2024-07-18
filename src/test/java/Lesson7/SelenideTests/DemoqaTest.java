@@ -111,7 +111,7 @@ public class DemoqaTest extends BaseTest {
     void fillFormTest() {
 
         String
-                baseUrl = "https://demoqa.com/automation-practice-form",
+                baseUrl = "https://demoqa.com/automation-practice-form#google_vignette",
                 firstName = "Ivan",
                 lastName = "Ivanov",
                 email = "Ivan.Ivanov@mail.ru",
@@ -164,22 +164,9 @@ public class DemoqaTest extends BaseTest {
         $(byText(state)).click();
         $(byId("city")).click();
         $(byId("stateCity-wrapper")).$(byText(city)).click();
+        ScrollPage.scrollPageDown();
         $(byId("submit")).click();
 
-        HashMap<String, String> formSubmit = new HashMap<>() {{
-            put("Student Name", firstName + " " + lastName);
-            put("Email", email);
-            put("Gender", genderRadioPick);
-            put("Mobile", mobilePhone);
-            put("Date of Birth", "14 April,1987");
-            put("Subjects", subject1 + ", " + subject2);
-            put("Hobbies", hobbiesSport);
-            put("Picture", Paths.get(fileName).getFileName().toString());
-            put("Address", currentAddress);
-            put("State and City", state + " " + city);
-        }};
-
         logger.info("The form is fully filled");
-
     }
 }
