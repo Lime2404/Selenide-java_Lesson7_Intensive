@@ -1,18 +1,20 @@
 package Lesson7.pageObjects;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import java.util.Random;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 public class ColorCompletionPage {
+    public String firstColorPlaceholder = null;
+    public String secondColorPlaceholder = null;
+    ElementsCollection twoPickedColors = $$(By.xpath("//div[@class='css-12jo7m5 auto-complete__multi-value__label']"));
 
-    SelenideElement firstPickedColor = $(By.xpath("//div[@class='css-1rhbuit-multiValue auto-complete__multi-value'][1]"));
-    SelenideElement secondPickedColor = $(By.xpath("//div[@class='css-1rhbuit-multiValue auto-complete__multi-value'][2]"));
 
     public ColorCompletionPage(String url) {
         Selenide.open(url);
@@ -34,13 +36,17 @@ public class ColorCompletionPage {
 
         inputElement.setValue(firstColor).pressEnter();
         inputElement.setValue(secondColor).pressEnter();
+        firstColorPlaceholder = firstColor;
+        secondColorPlaceholder = secondColor;
+        System.out.println(firstColor);
+        System.out.println(secondColor);
 
         }
-    public WebElement firstColorSelected(){
-        return firstPickedColor;
+    public String firstColorSelected(){
+       return twoPickedColors.get(0).getText();
     }
 
-    public WebElement secondColorSelected(){
-        return firstPickedColor;
+    public String secondColorSelected(){
+        return twoPickedColors.get(1).getText();
     }
 }

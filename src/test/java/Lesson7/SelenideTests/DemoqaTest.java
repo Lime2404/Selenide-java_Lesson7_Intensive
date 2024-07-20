@@ -94,14 +94,14 @@ public class DemoqaTest extends BaseTest {
     @Tag("Test4")
     public void pickColorFromList() {
         ColorCompletionPage colorCompletionPage = new ColorCompletionPage(BASE_URL + "auto-complete");
-        String[] colors = {"Red", "Green", "Purple", "Indigo"};
+        String[] colors = {"Red", "Green", "Purple", "Indigo", "White", "Yellow"};
 
         ScrollPage.scrollPageDown();
         colorCompletionPage.randomizer(colors);
-        Assertions.assertTrue(colorCompletionPage.firstColorSelected().isDisplayed());
-        Assertions.assertTrue(colorCompletionPage.secondColorSelected().isDisplayed());
+        Assertions.assertEquals(colorCompletionPage.firstColorPlaceholder, colorCompletionPage.firstColorSelected());
+        Assertions.assertEquals(colorCompletionPage.secondColorPlaceholder, colorCompletionPage.secondColorSelected());
         logger.info("Two random color sets have been selected");
-        Selenide.sleep(10000L);
+//        Selenide.sleep(5000L);
     }
 
 //    @Test
