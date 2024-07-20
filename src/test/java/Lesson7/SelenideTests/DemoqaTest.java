@@ -11,17 +11,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import java.nio.file.Paths;
-import java.util.HashMap;
-
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 
 public class DemoqaTest extends BaseTest {
     private final static String BASE_URL = "https://demoqa.com/";
 
-//    7. Output all actions to the console using the Log4j library
+// 7. Output all actions to the console using the Log4j library
     private static final Logger logger = LogManager.getLogger(DemoqaTest.class);
 
 
@@ -85,6 +81,7 @@ public class DemoqaTest extends BaseTest {
         if (progressBar.getStartButton().getText().equals("Reset")) {
             System.out.println("The status of the button turned to = " + progressBar.getStartButton().getText() + ", progress bar load is 100%");
         }
+        Assertions.assertTrue(progressBar.checkAreaValue().equals("100"));
         logger.info("The status of the button turned to = " + progressBar.getStartButton().getText() + ", progress bar load is 100%");
     }
 
@@ -101,6 +98,8 @@ public class DemoqaTest extends BaseTest {
 
         ScrollPage.scrollPageDown();
         colorCompletionPage.randomizer(colors);
+        Assertions.assertTrue(colorCompletionPage.firstColorSelected().isDisplayed());
+        Assertions.assertTrue(colorCompletionPage.secondColorSelected().isDisplayed());
         logger.info("Two random color sets have been selected");
         Selenide.sleep(10000L);
     }
