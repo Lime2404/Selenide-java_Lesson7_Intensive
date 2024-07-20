@@ -166,7 +166,7 @@ public class DemoqaTest extends BaseTest {
         $(byId("stateCity-wrapper")).$(byText(city)).click();
         ScrollPage.scrollPageDown();
         $(byId("submit")).click();
-
+        Assertions.assertTrue($(byCssSelector(".table-responsive")).isDisplayed());
         logger.info("The form is fully filled");
     }
 }
