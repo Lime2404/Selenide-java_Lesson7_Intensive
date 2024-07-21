@@ -11,17 +11,24 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 public class ColorCompletionPage {
-    public String firstColorPlaceholder = null;
-    public String secondColorPlaceholder = null;
+
+    private String firstColorPlaceholder = null;
+    private String secondColorPlaceholder = null;
     ElementsCollection twoPickedColors = $$(By.xpath("//div[@class='css-12jo7m5 auto-complete__multi-value__label']"));
 
+    public String getFirstColorPlaceholder() {
+        return firstColorPlaceholder;
+    }
+
+    public String getSecondColorPlaceholder() {
+        return secondColorPlaceholder;
+    }
 
     public ColorCompletionPage(String url) {
         Selenide.open(url);
     }
 
     public void randomizer(String[] colors) {
-
         Random random = new Random();
         int firstIndex = random.nextInt(colors.length);
         int secondIndex;
@@ -38,10 +45,8 @@ public class ColorCompletionPage {
         inputElement.setValue(secondColor).pressEnter();
         firstColorPlaceholder = firstColor;
         secondColorPlaceholder = secondColor;
-        System.out.println(firstColor);
-        System.out.println(secondColor);
-
         }
+
     public String firstColorSelected(){
        return twoPickedColors.get(0).getText();
     }

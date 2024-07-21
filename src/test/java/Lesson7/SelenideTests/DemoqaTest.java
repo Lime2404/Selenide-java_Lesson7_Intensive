@@ -98,8 +98,8 @@ public class DemoqaTest extends BaseTest {
 
         ScrollPage.scrollPageDown();
         colorCompletionPage.randomizer(colors);
-        Assertions.assertEquals(colorCompletionPage.firstColorPlaceholder, colorCompletionPage.firstColorSelected());
-        Assertions.assertEquals(colorCompletionPage.secondColorPlaceholder, colorCompletionPage.secondColorSelected());
+        Assertions.assertEquals(colorCompletionPage.getFirstColorPlaceholder(), colorCompletionPage.firstColorSelected());
+        Assertions.assertEquals(colorCompletionPage.getSecondColorPlaceholder(), colorCompletionPage.secondColorSelected());
         logger.info("Two random color sets have been selected");
 //        Selenide.sleep(5000L);
     }
