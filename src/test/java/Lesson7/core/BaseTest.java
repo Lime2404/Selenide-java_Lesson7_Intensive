@@ -8,12 +8,10 @@ import com.codeborne.selenide.logevents.SelenideLogger;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
 // 1. Create a Maven project (Java) using the following libraries:
 abstract public class BaseTest {
-    @BeforeAll
 
     public static void setUp() {
         SelenideConfig.setup();
