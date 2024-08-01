@@ -32,7 +32,7 @@ public class DemoqaTest extends BaseTest {
         String[] expectedElements = {"Elements", "Forms", "Alerts, Frame & Windows", "Widgets", "Interactions", "Book Store Application"};
         MainPage mainPage = new MainPage(BASE_URL);
         String names = mainPage.returnCard();
-        System.out.println(names);
+        System.out.println("Below is the list of elements "+ names);
         String[] actualList = names.split("\n+");
         Assertions.assertArrayEquals(expectedElements, actualList);
         logger.info("Assert returns 200");
