@@ -87,7 +87,7 @@ public class DemoqaTest extends BaseTest {
 
 // 4. Develop a test that selects values from the list //[Red, Green, Purple, Indigo] on the page https://demoqa.com/autocomplete
 //     "Type multiple color names". Important, 2 different values should //be selected at each run (use the Random function).
-    /*
+    /**
      * Select color randomly
      */
     @Test
@@ -101,10 +101,12 @@ public class DemoqaTest extends BaseTest {
         Assertions.assertEquals(colorCompletionPage.getFirstColorPlaceholder(), colorCompletionPage.firstColorSelected());
         Assertions.assertEquals(colorCompletionPage.getSecondColorPlaceholder(), colorCompletionPage.secondColorSelected());
         logger.info("Two random color sets have been selected");
-//        Selenide.sleep(5000L);
     }
 
-//    @Test
+//  5. Using selenium webdriver to develop an autotest that fills out a form on the page
+    /**
+     * Fill in the form
+     */
     @org.junit.jupiter.api.Test
     @Tag("Test5")
     void fillFormTest() {
