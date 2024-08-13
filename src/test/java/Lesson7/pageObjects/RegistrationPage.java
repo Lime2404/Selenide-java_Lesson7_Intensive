@@ -1,12 +1,7 @@
 package Lesson7.pageObjects;
 
 import Lesson7.utils.CalendarComponent;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-
-import java.util.HashMap;
-
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -31,12 +26,6 @@ public class RegistrationPage {
             submitButton = $(byId("submit"));
 
     private String relativeUrl = "/automation-practice-form";
-
-    //actions
-    public RegistrationPage openPage() {
-        Selenide.open(relativeUrl);
-        return this;
-    }
 
     public RegistrationPage setFirstName(String firstName) {
         firstNameInput.sendKeys(firstName);

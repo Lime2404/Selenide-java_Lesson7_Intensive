@@ -45,9 +45,9 @@ public class DemoqaTest extends BaseTest {
     @Tag("Test2")
     public void verifyElementPageEntities() {
         String[] expectedList = {"Text Box", "Check Box", "Radio Button", "Web Tables", "Buttons", "Links", "Broken Links - Images", "Upload and Download", "Dynamic Properties"};
-        MainPage mainPage2 = new MainPage(BASE_URL);
+        MainPage mainPage = new MainPage(BASE_URL);
         ScrollPage.scrollPageDown();
-        mainPage2.clicOnElements();
+        mainPage.clicOnElements();
 
         ElementsPage sideBarElements = new ElementsPage();
         String[] actualList = sideBarElements.getElementsList().first().getText().split("\n+");
@@ -75,7 +75,7 @@ public class DemoqaTest extends BaseTest {
         ScrollPage.scrollPageDown();
         progressBar.clickStartButton();
         while (progressBar.getStartButton().getText().equals("Stop")) {
-            System.out.println("Do not press " + progressBar.getStartButton().getText());
+//            System.out.println("Do not press " + progressBar.getStartButton().getText());
         }
 
         if (progressBar.getStartButton().getText().equals("Reset")) {
@@ -120,8 +120,8 @@ public class DemoqaTest extends BaseTest {
                 mobilePhone = "7123123456",
                 birthdayYear = "1987",
                 birthdayMonth = "April",
+                birthdayDate = "24",
                 subject1 = "Physics",
-                subject2 = "Commerce",
                 hobbiesSport = "Sports",
                 currentAddress = "sample address",
                 fileName = "img/Solveva.png",
@@ -134,39 +134,26 @@ public class DemoqaTest extends BaseTest {
             hideAdsButton.click();
         }
 
-        $(byId("firstName")).sendKeys(firstName);
-        $(byId("lastName")).sendKeys(lastName);
-        $(byId("userEmail")).sendKeys(email);
+        RegistrationPage registrationPage = new RegistrationPage();
+        registrationPage.setFirstName(firstName);
+        registrationPage.setLastName(lastName);
+        registrationPage.setUserEmail(email);
         ScrollPage.scrollPageDown();
-        $(byText(genderRadioPick)).click();
-        $(byId("userNumber")).sendKeys(mobilePhone);
+        registrationPage.chooseGenderInWrapper(genderRadioPick);
+        registrationPage.setMobilePhone(mobilePhone);
         ScrollPage.scrollPageDown();
-
-        $(byId("dateOfBirthInput")).click();
-        $(byCssSelector(".react-datepicker__year-select")).selectOptionByValue(birthdayYear);
-        $(byCssSelector(".react-datepicker__month-select")).selectOption(birthdayMonth);
-        $(byCssSelector(".react-datepicker__day.react-datepicker__day--014")).click();
-
-        $(byId("subjectsInput")).sendKeys("P");
+        registrationPage.setBirthDate(birthdayYear, birthdayMonth, birthdayDate);
+        registrationPage.setSubjectBySendKeys(subject1);
         ScrollPage.scrollPageDown();
-        $(byText(subject1)).click();
-        $(byId("subjectsInput")).sendKeys(subject2);
-        $(byId("subjectsInput")).pressEnter();
-
-
-        $(byText(hobbiesSport)).click();
-
-        $(byId("uploadPicture")).uploadFromClasspath(fileName);
-
-        $(byId("currentAddress")).sendKeys(currentAddress);
+        registrationPage.setHobby(hobbiesSport);
+        registrationPage.uploadPicture(fileName);
+        registrationPage.setCurrentAddress(currentAddress);
         ScrollPage.scrollPageDown();
-
-        $(byId("state")).scrollTo().click();
-        $(byText(state)).click();
-        $(byId("city")).click();
-        $(byId("stateCity-wrapper")).$(byText(city)).click();
+        registrationPage.selectStateFromDropDownList(state);
+        registrationPage.selectCityFromDropDownList(city);
         ScrollPage.scrollPageDown();
-        $(byId("submit")).click();
+        registrationPage.clickSubmitButton();
+
         Assertions.assertTrue($(byCssSelector(".table-responsive")).isDisplayed());
         logger.info("The form is fully filled");
     }
