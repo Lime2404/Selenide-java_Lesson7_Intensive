@@ -1,7 +1,6 @@
 package Lesson7.core;
 
 import Lesson7.properties.SelenideConfig;
-import Lesson7.utils.SelenideLogListener;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
@@ -15,7 +14,6 @@ abstract public class BaseTest {
 
     public static void setUp() {
         SelenideConfig.setup();
-        SelenideLogger.addListener("SeleniumTests.SelenideLogListener", new SelenideLogListener());
         SelenideLogger.addListener("allure", new AllureSelenide());
         WebDriverManager.chromedriver().setup();
         Configuration.browser = "chrome";
